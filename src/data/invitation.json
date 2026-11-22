@@ -23,45 +23,172 @@
       "id": "anh-nhim",
       "name": "Anh Nhím",
       "type": "vip",
-      "confirmation": true,
+      "confirmation": false,
       "message": "Em biết ơn vì anh Nhím đã xuất hiện và bên cạnh em trong quãng thời gian qua!! Em thương anh Nhímm"
     },
     {
       "id": "chi-ai-chi-han",
       "name": "Chị Ái chị Hân",
       "type": "vip",
-      "confirmation": true,
+      "confirmation": false,
       "message": "Em cảm ơn 2 người chị đáng iu đã lun bên cạnh động viên em <3 Em thương 2 chị nhìu nháaa"
     },
     {
       "id": "chu-duc",
       "name": "Chú Đức",
       "type": "vip",
-      "confirmation": true,
+      "confirmation": false,
       "message": "Em cảm ơn khầy vì cho em biết nhiều hơn về âm nhạc nhaaa!!!! Khầy mãi đỉnh <3"
     },
     {
       "id": "ly-hoang",
       "name": "Ly Hoàng",
       "type": "vip",
-      "confirmation": true,
+      "confirmation": false,
       "message": "Biết ơn tình bạn này cậu ơi! Tui cảm ơn cậu vì vẫn ở đây nhoa"
     },
     {
-      "id": "phi-linh",
-      "name": "Pà Phi Linh",
+      "id": "2fam",
+      "name": "2fam",
+      "type": "vip",
+      "confirmation": false,
+      "message": "xm cảm ơn cả nhà iu vì luôn bên cạnh! Yêu cả nhà <3"
+    },
+    {
+      "id": "guest-01",
+      "name": "Hoan Hub",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "tri-phuc",
+      "id": "guest-02",
+      "name": "Cừu Đen",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-03",
+      "name": "Phi Linh",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-04",
       "name": "Trí Phúc",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "faye",
+      "id": "guest-05",
+      "name": "Fufu",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-06",
+      "name": "Papa",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-07",
+      "name": "Soobin Hoàng Duy",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-08",
+      "name": "Phương Thảo",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-09",
+      "name": "Anh Huân",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-10",
+      "name": "Anh Đạt",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-11",
       "name": "Faye",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-12",
+      "name": "Chị Thảo",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-13",
+      "name": "Anh Thịnh",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-14",
+      "name": "Lê Duy",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-15",
+      "name": "Nhẫn",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-16",
+      "name": "Minh Quân",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-17",
+      "name": "Khoa",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-18",
+      "name": "Phúc Nguyên",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-19",
+      "name": "Dreamwork",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-20",
+      "name": "Hivane",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-21",
+      "name": "Chip",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-22",
+      "name": "nhóc Thành",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-23",
+      "name": "Anh Nhân",
       "type": "normal",
       "confirmation": false
     }

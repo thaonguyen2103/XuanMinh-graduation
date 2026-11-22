@@ -7,7 +7,6 @@ interface TopBarProps {
 }
 
 export const TopBar: React.FC<TopBarProps> = ({ eventDate }) => {
-  // Format date for Vietnam locale: DD/MM/YYYY
   const formattedDate = React.useMemo(() => {
     try {
       const d = new Date(eventDate);
@@ -24,16 +23,7 @@ export const TopBar: React.FC<TopBarProps> = ({ eventDate }) => {
 
   return (
     <div className="topbar mono">
-      <div className="flex items-center">
-        <span>Graduation Gig · Live</span>
-        <span className="equalizer" aria-hidden="true" title="Audio playing">
-          <span className="equalizer-bar"></span>
-          <span className="equalizer-bar"></span>
-          <span className="equalizer-bar"></span>
-          <span className="equalizer-bar"></span>
-          <span className="equalizer-bar"></span>
-        </span>
-      </div>
+      <span>Graduation Gig · Live</span>
       <span>{formattedDate}</span>
       <span>Admit One</span>
     </div>

@@ -1,7 +1,7 @@
 'use client';
 
-import React from 'react';
-import Link from 'next/link';
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface InvalidGuestProps {
   attemptedId?: string;
@@ -9,72 +9,107 @@ interface InvalidGuestProps {
 }
 
 export const InvalidGuest: React.FC<InvalidGuestProps> = ({ attemptedId, reason = 'not_found' }) => {
+  const [code, setCode] = useState('');
+  const router = useRouter();
+
+  const handleGo = (e: React.FormEvent) => {
+    e.preventDefault();
+    const trimmed = code.trim();
+    if (trimmed) {
+      router.push(`/${trimmed}`);
+    }
+  };
+
   return (
-    <div className="min-h-screen flex flex-col justify-between" style={{ background: 'var(--denim)' }}>
+    <div className="home-screen">
+      {/* Topbar */}
       <div className="topbar mono">
-        <span>Graduation Gig · Live</span>
-        <span>Access Error</span>
-        <span>Invalid Link</span>
+        <span>GRADUATION GIG · LIVE</span>
+        <span>ADMIT ONE</span>
       </div>
 
-      <div className="notice-box">
-        <h2>Thiệp Mời Không Hợp Lệ</h2>
-        {reason === 'no_id' ? (
-          <p>
-            Bạn đang truy cập trực tiếp vào trang chủ. Mỗi khách mời có một liên kết thiệp mời riêng dạng{' '}
-            <code className="text-[#ecd39a] bg-[#0d1520] px-2 py-1 rounded">/[mã-khách-mời]</code>.
-            <br />
-            <br />
-            Vui lòng sử dụng đúng liên kết cá nhân được gửi cho bạn trong thư mời!
-          </p>
-        ) : (
-          <p>
-            Mã khách mời <strong className="text-[#ecd39a]">&ldquo;{attemptedId}&rdquo;</strong> không tồn tại trong danh sách hoặc đường dẫn đã bị chỉnh sửa.
-            <br />
-            <br />
-            Hệ thống không cho phép chỉnh sửa URL. Vui lòng bấm vào đúng liên kết thiệp mời ban đầu đã được gửi cho bạn.
-          </p>
-        )}
+      <div className="home-body">
+        {/* Đĩa than & sticker huy hiệu vàng ở góc trên bên phải */}
+        <div className="home-decor" aria-hidden="true">
+          <div className="home-record">
+            <div className="home-record-center"></div>
+          </div>
+          <div className="home-sticker mono">
+            <span className="home-sticker-title">ONLY ONCE<br />IN LIFE</span>
+            <span className="home-sticker-sub">★ 2026 ★</span>
+          </div>
+        </div>
 
-        <div className="mt-8 pt-6 border-t border-[#3a6ba8] text-sm text-[#a9bad6]">
-          <p className="mb-4">Liên kết mẫu dùng thử trong danh sách JSON:</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link
-              href="/vip-01"
-              className="bg-[#ecd39a] text-[#0d1520] font-bold px-4 py-2 hover:opacity-90 transition rounded-sm text-xs mono"
-            >
-              /vip-01 (VIP)
-            </Link>
-            <Link
-              href="/vip-02"
-              className="bg-[#ecd39a] text-[#0d1520] font-bold px-4 py-2 hover:opacity-90 transition rounded-sm text-xs mono"
-            >
-              /vip-02 (VIP Đã xác nhận)
-            </Link>
-            <Link
-              href="/guest-01"
-              className="bg-[#c9d6ea] text-[#0d1520] font-bold px-4 py-2 hover:opacity-90 transition rounded-sm text-xs mono"
-            >
-              /guest-01 (Normal)
-            </Link>
-            <Link
-              href="/guest-02"
-              className="bg-[#c9d6ea] text-[#0d1520] font-bold px-4 py-2 hover:opacity-90 transition rounded-sm text-xs mono"
-            >
-              /guest-02 (Normal)
-            </Link>
-            <Link
-              href="/guest-xminh"
-              className="bg-[#c9d6ea] text-[#0d1520] font-bold px-4 py-2 hover:opacity-90 transition rounded-sm text-xs mono"
-            >
-              /guest-xminh
-            </Link>
+        {/* Khối nội dung chính */}
+        <div className="home-content">
+          <div className="kicker mono">THIỆP MỜI TỐT NGHIỆP · XMINH</div>
+
+          <h1 className="home-title">
+            {reason === 'no_id' ? (
+              <>
+                <span>THIỆP MỜI</span>
+                <span>CÁ NHÂN</span>
+              </>
+            ) : (
+              <>
+                <span>KHÔNG TÌM THẤY</span>
+                <span>THIỆP MỜI</span>
+              </>
+            )}
+          </h1>
+
+          {reason === 'no_id' ? (
+            <div className="home-desc">
+              <p className="home-desc-lead">
+                Chào mừng bạn đến với trang thiệp mời lễ tốt nghiệp của <span className="home-name-tag">XMINH</span> .
+              </p>
+              <p className="home-desc-sub">
+                Mỗi vị khách quý đều có một liên kết thiệp mời riêng được thiết kế kèm hình ảnh và thông điệp dành riêng cho bạn. Vui lòng truy cập theo đường link cá nhân đã nhận được.
+              </p>
+            </div>
+          ) : (
+            <div className="home-desc">
+              <p className="home-desc-lead">
+                Mã thiệp mời <span className="home-name-tag text-[#ecd39a]">&ldquo;{attemptedId || '...'}&rdquo;</span> không tồn tại trong danh sách.
+              </p>
+              <p className="home-desc-sub">
+                Hệ thống bảo mật không cho phép chỉnh sửa URL tự do. Vui lòng kiểm tra lại liên kết được gửi cho bạn hoặc nhập mã thiệp mời bên dưới.
+              </p>
+            </div>
+          )}
+
+          {/* Vé nhập mã thiệp mời riêng */}
+          <div className="home-ticket-card">
+            <div className="ticket-tape"></div>
+            <form onSubmit={handleGo}>
+              <label htmlFor="home-code-input" className="ticket-label mono">
+                BẠN CÓ MÃ THIỆP MỜI RIÊNG?
+              </label>
+              <div className="ticket-input-wrap">
+                <input
+                  id="home-code-input"
+                  type="text"
+                  placeholder="Nhập mã thiệp mời của bạn..."
+                  value={code}
+                  onChange={(e) => setCode(e.target.value)}
+                  className="ticket-input mono"
+                  autoComplete="off"
+                  spellCheck="false"
+                />
+              </div>
+              <button type="submit" className="ticket-btn mono">
+                <span>Mở thiệp →</span>
+              </button>
+            </form>
           </div>
         </div>
       </div>
 
+      {/* Footer */}
       <footer className="mono">
-        <p>Graduation Invitation Platform — XMINH</p>
+        <p>
+          Made with <b>♥</b> &amp; loud music — <b>XMINH</b>
+        </p>
       </footer>
     </div>
   );
