@@ -24,7 +24,16 @@ export const TopBar: React.FC<TopBarProps> = ({ eventDate }) => {
 
   return (
     <div className="topbar mono">
-      <span>Graduation Gig · Live</span>
+      <div className="flex items-center">
+        <span>Graduation Gig · Live</span>
+        <span className="equalizer" aria-hidden="true" title="Audio playing">
+          <span className="equalizer-bar"></span>
+          <span className="equalizer-bar"></span>
+          <span className="equalizer-bar"></span>
+          <span className="equalizer-bar"></span>
+          <span className="equalizer-bar"></span>
+        </span>
+      </div>
       <span>{formattedDate}</span>
       <span>Admit One</span>
     </div>

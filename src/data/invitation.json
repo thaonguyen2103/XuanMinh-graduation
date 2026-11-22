@@ -1,46 +1,67 @@
 {
   "host": {
     "name": "XMINH",
-    "time": "2026-12-20T18:00:00+07:00",
-    "timeNote": "Cửa mở từ 17:30",
-    "placeName": "Trường ĐH Khoa học Tự nhiên - ĐHQG-HCM",
-    "address": "227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM",
-    "mapUrl": "https://maps.google.com/?q=227+Nguyễn+Văn+Cừ+Quận+5+TPHCM",
+    "time": "2026-11-29T16:00:00+07:00",
+    "timeNote": "Thời gian chính xác sẽ cập nhật vòa ngày đó",
+    "placeName": "Hội trường Trần Chí Đáo",
+    "address": "Nhà Điều hành ĐHQG-HCM",
+    "mapUrl": "https://maps.app.goo.gl/BmKDYihvzhGe4BBi7?g_st=ic",
     "closing": "Thân mến,",
-    "defaultMessage": "Cảm ơn {name} đã đồng hành cùng mình suốt thời gian qua. Mình rất mong được gặp bạn trong ngày đặc biệt này.",
+    "defaultMessage": "Cảm ơn {name} đã xuất hiện trong quãng thời gian qua. Mình rất vui nếu được gặp bạn trong ngày này.",
     "signatureImage": "/images/signature.png",
     "signatureInvert": true
   },
   "guests": [
     {
-      "id": "vip-01",
-      "name": "GS. TS. Nguyễn Văn A",
+      "id": "vk",
+      "name": "Công chúa bé Bơ",
       "type": "vip",
       "confirmation": false,
-      "message": "Em kính mời Thầy đến tham dự buổi lễ tốt nghiệp của em. Sự hiện diện của Thầy là niềm vinh dự lớn nhất của em!"
+      "message": "Cảm ơn công chúa iu vì đã luôn ủng hộ anh!! Anh iu em nhìu"
     },
     {
-      "id": "vip-02",
-      "name": "Chị Hoàng Lan (VIP)",
+      "id": "anh-nhim",
+      "name": "Anh Nhím",
       "type": "vip",
       "confirmation": true,
-      "message": "Cảm ơn chị Lan đã luôn hỗ trợ và đồng hành cùng em trong suốt chặng đường đại học."
+      "message": "Em biết ơn vì anh Nhím đã xuất hiện và bên cạnh em trong quãng thời gian qua!! Em thương anh Nhímm"
     },
     {
-      "id": "guest-01",
-      "name": "Nguyễn Hoàng Nam",
+      "id": "chi-ai-chi-han",
+      "name": "Chị Ái chị Hân",
+      "type": "vip",
+      "confirmation": true,
+      "message": "Em cảm ơn 2 người chị đáng iu đã lun bên cạnh động viên em <3 Em thương 2 chị nhìu nháaa"
+    },
+    {
+      "id": "chu-duc",
+      "name": "Chú Đức",
+      "type": "vip",
+      "confirmation": true,
+      "message": "Em cảm ơn khầy vì cho em biết nhiều hơn về âm nhạc nhaaa!!!! Khầy mãi đỉnh <3"
+    },
+    {
+      "id": "ly-hoang",
+      "name": "Ly Hoàng",
+      "type": "vip",
+      "confirmation": true,
+      "message": "Biết ơn tình bạn này cậu ơi! Tui cảm ơn cậu vì vẫn ở đây nhoa"
+    },
+    {
+      "id": "phi-linh",
+      "name": "Pà Phi Linh",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-02",
-      "name": "Trần Thị Mai",
+      "id": "tri-phuc",
+      "name": "Trí Phúc",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-xminh",
-      "name": "Bạn Thân Của Minh",
+      "id": "faye",
+      "name": "Faye",
       "type": "normal",
       "confirmation": false
     }

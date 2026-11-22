@@ -15,8 +15,8 @@ export const Hero: React.FC<HeroProps> = ({ guest, host }) => {
   // Determine photo path:
   // Normal guests: use image 1 (/images/1.jpg)
   // VIP guests: use individual image named after their ID (/images/[id].png)
-  const defaultPhotoSrc = '/images/1.jpg';
-  const initialPhotoSrc = guest.type === 'vip' ? `/images/${guest.id}.png` : defaultPhotoSrc;
+  const defaultPhotoSrc = '/images/default-photo.jpg';
+  const initialPhotoSrc = guest.type === 'vip' ? `/images/guest-imgs/${guest.id}.jpg` : defaultPhotoSrc;
 
   const [imgSrc, setImgSrc] = useState<string>(initialPhotoSrc);
 

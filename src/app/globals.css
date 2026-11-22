@@ -59,14 +59,44 @@ body::after {
   color: var(--paper);
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 16px;
   padding: 10px 24px;
   font-size: 12px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
+  position: relative;
+  z-index: 10;
 }
 .topbar span:nth-child(2) {
   color: var(--muted);
+}
+
+/* Audio visualizer spectrum bars */
+.equalizer {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 14px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+.equalizer-bar {
+  width: 3px;
+  background: var(--blonde);
+  border-radius: 1px;
+  animation: eqBounce 1.2s ease-in-out infinite alternate;
+}
+.equalizer-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; animation-duration: 0.8s; }
+.equalizer-bar:nth-child(2) { height: 80%; animation-delay: 0.3s; animation-duration: 1.1s; }
+.equalizer-bar:nth-child(3) { height: 100%; animation-delay: 0.15s; animation-duration: 0.9s; }
+.equalizer-bar:nth-child(4) { height: 60%; animation-delay: 0.4s; animation-duration: 1.3s; }
+.equalizer-bar:nth-child(5) { height: 90%; animation-delay: 0.25s; animation-duration: 1.0s; }
+
+@keyframes eqBounce {
+  0% { transform: scaleY(0.25); }
+  50% { transform: scaleY(1); }
+  100% { transform: scaleY(0.4); }
 }
 
 /* hero */
@@ -96,13 +126,28 @@ body::after {
   padding: 8px 14px;
   transform: rotate(-2deg);
   margin-bottom: 26px;
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+  animation: kickerEntrance 0.8s cubic-bezier(0.2, 1.2, 0.4, 1) both;
 }
+
+@keyframes kickerEntrance {
+  from {
+    opacity: 0;
+    transform: rotate(-5deg) translateY(-14px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-2deg) translateY(0);
+  }
+}
+
 h1 {
   font-family: 'Anton', sans-serif;
   font-weight: 400;
   text-transform: uppercase;
   line-height: 0.98;
   letter-spacing: 0.01em;
+  animation: textEntrance 0.9s cubic-bezier(0.2, 1.2, 0.4, 1) both;
 }
 h1 .small {
   display: block;
@@ -115,6 +160,21 @@ h1 .big {
   font-size: clamp(64px, 12vw, 160px);
   color: var(--paper);
   text-shadow: 6px 6px 0 var(--ink);
+  transition: transform 0.3s ease;
+}
+h1:hover .big {
+  transform: scale(1.02);
+}
+
+@keyframes textEntrance {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .for {
@@ -127,7 +187,25 @@ h1 .big {
   transform: rotate(-1.5deg);
   position: relative;
   box-shadow: 5px 5px 0 var(--ink);
+  transition: transform 0.25s cubic-bezier(0.2, 1.3, 0.4, 1), box-shadow 0.25s ease;
+  animation: forEntrance 1s 0.2s cubic-bezier(0.2, 1.2, 0.4, 1) both;
 }
+.for:hover {
+  transform: rotate(0deg) scale(1.03);
+  box-shadow: 8px 8px 0 var(--ink);
+}
+
+@keyframes forEntrance {
+  from {
+    opacity: 0;
+    transform: rotate(-5deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(-1.5deg) scale(1);
+  }
+}
+
 .for small {
   display: block;
   font-size: 11px;
@@ -162,21 +240,26 @@ h1 .big {
 .note {
   margin-top: 28px;
   max-width: 46ch;
+  animation: noteEntrance 1s 0.3s cubic-bezier(0.2, 1.2, 0.4, 1) both;
 }
+
+@keyframes noteEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .thanks {
   color: var(--paper);
   line-height: 1.8;
   font-size: 16.5px;
   white-space: pre-line;
   overflow-wrap: anywhere;
-}
-.thanks.loading {
-  color: transparent;
-  user-select: none;
-  min-height: 7.2em;
-  background: repeating-linear-gradient(transparent 0 0.55em, rgba(238, 243, 250, 0.16) 0.55em 1.25em, transparent 1.25em 1.8em);
-  -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent);
-  mask-image: linear-gradient(90deg, #000 88%, transparent);
 }
 .closing {
   margin-top: 20px;
@@ -193,6 +276,10 @@ h1 .big {
   height: 124px;
   width: auto;
   max-width: 100%;
+  transition: transform 0.3s ease;
+}
+.signature:hover img {
+  transform: scale(1.05) rotate(-1deg);
 }
 .signature.invert {
   mix-blend-mode: screen;
@@ -205,7 +292,10 @@ h1 .big {
 .stage {
   position: relative;
   min-height: 560px;
+  perspective: 1000px;
 }
+
+/* ĐĨA THAN QUAY VỚI GROOVE HIỆU ỨNG */
 .record {
   position: absolute;
   width: 290px;
@@ -217,7 +307,46 @@ h1 .big {
     radial-gradient(circle, var(--paper) 0 11%, var(--ink) 11.5% 14%, transparent 14.5%),
     repeating-radial-gradient(circle, #0d1520 0 3px, #17233a 3px 4px);
   box-shadow: 8px 8px 0 var(--ink);
+  transform-origin: center center;
+  animation: spinRecord 10s linear infinite;
+  transition: right 0.6s cubic-bezier(0.2, 1.2, 0.3, 1), top 0.6s ease, box-shadow 0.6s ease;
+  z-index: 1;
 }
+
+/* Center vinyl shiny reflections */
+.record::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    rgba(255, 255, 255, 0.12) 0deg,
+    transparent 60deg,
+    rgba(255, 255, 255, 0.16) 180deg,
+    transparent 240deg,
+    rgba(255, 255, 255, 0.12) 360deg
+  );
+  pointer-events: none;
+}
+
+@keyframes spinRecord {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Hover stage: Đĩa than trượt ra ngoài và quay nhanh hơn */
+.stage:hover .record {
+  right: -105px;
+  top: -24px;
+  box-shadow: 14px 14px 0 var(--ink);
+  animation-duration: 3.5s; /* quay nhanh hơn như đang chơi nhạc */
+}
+
 .photo {
   position: absolute;
   left: 50%;
@@ -228,6 +357,12 @@ h1 .big {
   padding: 12px 12px 52px;
   transform: rotate(2.5deg);
   box-shadow: 10px 10px 0 var(--ink);
+  transition: transform 0.4s cubic-bezier(0.2, 1.2, 0.3, 1), box-shadow 0.4s ease;
+  z-index: 2;
+}
+.photo:hover {
+  transform: rotate(0deg) translateY(-8px) scale(1.02);
+  box-shadow: 16px 16px 0 var(--ink);
 }
 .photo::before {
   content: "";
@@ -249,6 +384,10 @@ h1 .big {
   background: #3d4346;
   aspect-ratio: 1000 / 1149;
   object-fit: cover;
+  transition: filter 0.3s ease;
+}
+.photo:hover img {
+  filter: contrast(1.04) brightness(1.02);
 }
 .photo figcaption {
   position: absolute;
@@ -262,6 +401,8 @@ h1 .big {
   letter-spacing: 0.2em;
   text-transform: uppercase;
 }
+
+/* STICKER LẮC LƯ / FLOATING ANIMATION */
 .sticker {
   position: absolute;
   left: calc(50% + 104px);
@@ -275,7 +416,6 @@ h1 .big {
   display: grid;
   place-items: center;
   text-align: center;
-  transform: rotate(12deg);
   border: 3px solid var(--ink);
   box-shadow: 4px 4px 0 var(--ink);
   font-family: 'Anton', sans-serif;
@@ -283,7 +423,29 @@ h1 .big {
   text-transform: uppercase;
   font-size: 21px;
   letter-spacing: 0.04em;
+  transform-origin: center center;
+  animation: floatSticker 3.6s ease-in-out infinite alternate;
+  cursor: pointer;
+  transition: box-shadow 0.2s ease;
 }
+.sticker:hover {
+  animation-play-state: paused;
+  transform: rotate(24deg) scale(1.15) !important;
+  box-shadow: 7px 7px 0 var(--ink);
+}
+
+@keyframes floatSticker {
+  0% {
+    transform: rotate(12deg) translateY(0px) scale(1);
+  }
+  50% {
+    transform: rotate(16deg) translateY(-8px) scale(1.05);
+  }
+  100% {
+    transform: rotate(8deg) translateY(3px) scale(0.98);
+  }
+}
+
 .sticker small {
   display: block;
   font-family: 'Space Mono', monospace;
@@ -292,7 +454,7 @@ h1 .big {
   margin-top: 6px;
 }
 
-/* ===== 3 băng cassette ===== */
+/* ===== 3 BĂNG CASSETTE ===== */
 .tickets {
   background: var(--denim-deep);
   padding: 64px 24px 44px;
@@ -327,6 +489,8 @@ h1 .big {
   gap: 30px;
   align-items: stretch;
 }
+
+/* CASSETTE TAPE VỚI HIỆU ỨNG NÂNG 3D VÀ QUAY */
 .cassette {
   position: relative;
   display: flex;
@@ -337,7 +501,9 @@ h1 .big {
   padding: 14px 14px 0;
   overflow: hidden;
   box-shadow: 8px 8px 0 #050a12;
+  transition: transform 0.35s cubic-bezier(0.2, 1.2, 0.3, 1), box-shadow 0.35s ease;
 }
+
 .tapes .cassette:nth-child(1) {
   transform: rotate(-1.4deg);
 }
@@ -349,6 +515,21 @@ h1 .big {
   transform: rotate(-0.7deg);
   background: #1f2b3b;
 }
+
+/* Hover từng băng cassette: Nâng bổng và đổi góc nghiêng */
+.tapes .cassette:nth-child(1):hover {
+  transform: translateY(-12px) rotate(-2.5deg) scale(1.02);
+  box-shadow: 14px 14px 0 #050a12;
+}
+.tapes .cassette:nth-child(2):hover {
+  transform: translateY(-12px) rotate(0deg) scale(1.02);
+  box-shadow: 14px 14px 0 #050a12;
+}
+.tapes .cassette:nth-child(3):hover {
+  transform: translateY(-12px) rotate(-1.5deg) scale(1.02);
+  box-shadow: 14px 14px 0 #050a12;
+}
+
 .screw {
   position: absolute;
   width: 10px;
@@ -356,6 +537,7 @@ h1 .big {
   border-radius: 50%;
   background: #3b4859;
   border: 2px solid #0d1520;
+  transition: transform 0.4s ease;
 }
 .screw::after {
   content: "";
@@ -373,6 +555,10 @@ h1 .big {
 .screw.bl { left: 6px; bottom: 6px; }
 .screw.br { right: 6px; bottom: 6px; }
 
+.cassette:hover .screw {
+  transform: rotate(90deg);
+}
+
 .label {
   flex: 1;
   display: flex;
@@ -386,6 +572,7 @@ h1 .big {
 .label-head {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   gap: 8px;
   background: var(--denim);
   color: var(--paper);
@@ -487,31 +674,71 @@ h1 .big {
   align-items: center;
   padding: 0 6px;
   box-shadow: inset 0 0 0 3px #1b2636;
+  overflow: hidden;
 }
+
+/* Sợi dây băng chạy qua giữa 2 cuộn băng */
 .window::before {
   content: "";
   position: absolute;
   left: 32px;
   right: 32px;
   top: 50%;
-  height: 2px;
-  background: #46566e;
+  height: 3px;
+  background: repeating-linear-gradient(
+    90deg,
+    #46566e 0px,
+    #7fa6d6 6px,
+    #46566e 12px
+  );
+  background-size: 24px 100%;
+  animation: tapeRun 0.6s linear infinite;
+  z-index: 0;
 }
+
+@keyframes tapeRun {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 24px 0;
+  }
+}
+
+/* BÁNH RĂNG BĂNG CASSETTE QUAY MƯỢT MÀ */
 .reel {
   width: 28px;
   height: 28px;
-  animation: spin 7s linear infinite;
+  animation: spinReel 2.4s linear infinite;
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  transform-origin: center center;
+  display: block;
 }
 .reel.r2 {
-  animation-duration: 9s;
+  animation-duration: 2.2s;
 }
-@keyframes spin {
+
+@keyframes spinReel {
+  from {
+    transform: rotate(0deg);
+  }
   to {
     transform: rotate(360deg);
   }
 }
+
+/* Khi hover băng cassette: Bánh răng quay tốc độ cao (Fast Forward) */
+.cassette:hover .reel {
+  animation-duration: 0.7s;
+}
+.cassette:hover .reel.r2 {
+  animation-duration: 0.65s;
+}
+.cassette:hover .window::before {
+  animation-duration: 0.2s;
+}
+
 .hole {
   position: absolute;
   bottom: 9px;
@@ -539,6 +766,11 @@ h1 .big {
   color: var(--paper);
   font-size: 22px;
   letter-spacing: 0.04em;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+.countdown:hover b {
+  color: var(--blonde);
 }
 
 /* RSVP */
@@ -555,7 +787,12 @@ h1 .big {
   text-align: center;
   position: relative;
   box-shadow: 9px 9px 0 var(--denim-light);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+.rsvp-box:hover {
+  box-shadow: 12px 12px 0 var(--denim-light);
+}
+
 .rsvp-box::before {
   content: "RSVP";
   position: absolute;
@@ -581,6 +818,8 @@ h1 .big {
   color: var(--ink);
   padding: 0 12px;
 }
+
+/* NÚT BẤM "MÌNH SẼ ĐẾN" VỚI HIỆU ỨNG NHỊP THỞ / GLOW */
 .btn {
   font-family: 'Anton', sans-serif;
   font-size: 24px;
@@ -592,12 +831,24 @@ h1 .big {
   padding: 16px 52px;
   cursor: pointer;
   box-shadow: 6px 6px 0 var(--denim-light);
-  transition: transform 0.12s, box-shadow 0.12s;
+  transition: transform 0.15s cubic-bezier(0.2, 1.3, 0.4, 1), box-shadow 0.15s ease, background 0.2s ease;
   display: inline-block;
+  animation: btnPulseGlow 3s infinite;
 }
+
+@keyframes btnPulseGlow {
+  0%, 100% {
+    box-shadow: 6px 6px 0 var(--denim-light);
+  }
+  50% {
+    box-shadow: 6px 6px 0 var(--denim-light), 0 0 20px rgba(236, 211, 154, 0.45);
+  }
+}
+
 .btn:hover:not(:disabled) {
-  transform: translate(-3px, -3px);
-  box-shadow: 9px 9px 0 var(--denim-light);
+  transform: translate(-3px, -3px) scale(1.02);
+  box-shadow: 10px 10px 0 var(--denim-light), 0 0 25px rgba(236, 211, 154, 0.6);
+  background: var(--blonde);
 }
 .btn:active:not(:disabled) {
   transform: translate(6px, 6px);
@@ -609,19 +860,34 @@ h1 .big {
   border: 3px dashed #3b5483;
   box-shadow: none;
   cursor: not-allowed;
+  animation: none;
 }
 .status {
   margin-top: 26px;
   min-height: 24px;
   font-weight: 700;
   font-size: 15px;
+  transition: all 0.3s ease;
 }
 .status.ok {
-  color: var(--paper);
+  color: var(--blonde);
+  animation: statusPop 0.5s cubic-bezier(0.2, 1.4, 0.4, 1);
 }
 .status.err {
   color: #ff9a8a;
+  animation: shakeErr 0.4s ease;
 }
+
+@keyframes statusPop {
+  0% { transform: scale(0.85); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes shakeErr {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+}
+
 .guest-id {
   display: inline-block;
   margin-top: 10px;
@@ -630,6 +896,7 @@ h1 .big {
   letter-spacing: 0.2em;
 }
 
+/* DẤU MỘC ĐÓNG XÁC NHẬN VỚI HIỆU ỨNG SLAM ĐẬP MẠNH */
 .stamp {
   display: none;
   position: absolute;
@@ -644,17 +911,25 @@ h1 .big {
   font-size: 28px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
+  box-shadow: 0 0 15px rgba(236, 211, 154, 0.3);
 }
 .stamp.show {
   display: block;
-  animation: stamp 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) forwards;
+  animation: stampSlam 0.5s cubic-bezier(0.18, 1.4, 0.3, 1) forwards;
 }
-@keyframes stamp {
-  from {
-    transform: rotate(-9deg) scale(2.2);
+
+@keyframes stampSlam {
+  0% {
+    transform: rotate(-9deg) scale(3.5);
     opacity: 0;
+    filter: blur(4px);
   }
-  to {
+  70% {
+    transform: rotate(-9deg) scale(0.9);
+    opacity: 1;
+    filter: blur(0px);
+  }
+  100% {
     transform: rotate(-9deg) scale(1);
     opacity: 1;
   }
@@ -698,6 +973,7 @@ footer b {
   padding: 40px 32px;
   text-align: center;
   position: relative;
+  animation: forEntrance 0.6s ease both;
 }
 .notice-box h2 {
   font-family: 'Anton', sans-serif;
@@ -716,6 +992,10 @@ footer b {
   .reel { animation: none; }
   .stamp.show { animation: none; }
   .confetti { display: none; }
+  .record { animation: none; }
+  .sticker { animation: none; }
+  .equalizer-bar { animation: none; }
+  .btn { animation: none; }
 }
 
 @media (max-width: 900px) {

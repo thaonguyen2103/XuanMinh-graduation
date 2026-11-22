@@ -31,7 +31,15 @@ export const CassettesSection: React.FC<CassettesSectionProps> = ({ host }) => {
   return (
     <section className="tickets" aria-label="Thông tin buổi lễ">
       <div className="section-label mono">
-        Side A · Mix by <span className="mix-by">{host.name}</span>
+        <div className="flex items-center gap-2">
+          <span>Side A · Mix by <span className="mix-by">{host.name}</span></span>
+          <span className="equalizer" aria-hidden="true">
+            <span className="equalizer-bar"></span>
+            <span className="equalizer-bar"></span>
+            <span className="equalizer-bar"></span>
+            <span className="equalizer-bar"></span>
+          </span>
+        </div>
       </div>
 
       {/* SVG Reel Symbol for Cassette Deck */}
@@ -50,7 +58,7 @@ export const CassettesSection: React.FC<CassettesSectionProps> = ({ host }) => {
 
       <div className="tapes">
         {/* Track 01: Date */}
-        <article className="cassette">
+        <article className="cassette" title="Di chuột để tua nhanh băng">
           <span className="screw tl"></span>
           <span className="screw tr"></span>
           <span className="screw bl"></span>
@@ -92,7 +100,7 @@ export const CassettesSection: React.FC<CassettesSectionProps> = ({ host }) => {
         </article>
 
         {/* Track 02: Time */}
-        <article className="cassette">
+        <article className="cassette" title="Di chuột để tua nhanh băng">
           <span className="screw tl"></span>
           <span className="screw tr"></span>
           <span className="screw bl"></span>
@@ -130,7 +138,7 @@ export const CassettesSection: React.FC<CassettesSectionProps> = ({ host }) => {
         </article>
 
         {/* Track 03: Place */}
-        <article className="cassette">
+        <article className="cassette" title="Di chuột để tua nhanh băng">
           <span className="screw tl"></span>
           <span className="screw tr"></span>
           <span className="screw bl"></span>
