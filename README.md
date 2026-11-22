@@ -21,20 +21,80 @@ Sau đó mở trình duyệt và truy cập:
 
 ---
 
-## 🔗 Các Đường Link Mẫu Để Thử Nghiệm
+## 🔗 Danh Sách Khách Mời & Đường Link (Guest List)
 
-Mỗi khách mời có một link riêng dạng `http://localhost:3000/[guest-id]`:
+Domain Production: **https://xuan-minh-graduation-invitation.vercel.app**
 
-| Loại khách | Link truy cập | Mô tả | Ảnh sử dụng |
-|---|---|---|---|
-| **VIP** | [http://localhost:3000/vip-01](http://localhost:3000/vip-01) | GS. TS. Nguyễn Văn A (chưa xác nhận) | `/images/vip-01.png` |
-| **VIP** | [http://localhost:3000/vip-02](http://localhost:3000/vip-02) | Chị Hoàng Lan (đã xác nhận) | `/images/vip-02.png` |
-| **Normal** | [http://localhost:3000/guest-01](http://localhost:3000/guest-01) | Nguyễn Hoàng Nam | `/images/1.jpg` (ảnh 1) |
-| **Normal** | [http://localhost:3000/guest-02](http://localhost:3000/guest-02) | Trần Thị Mai | `/images/1.jpg` (ảnh 1) |
-| **Normal** | [http://localhost:3000/guest-xminh](http://localhost:3000/guest-xminh) | Bạn Thân Của Minh | `/images/1.jpg` (ảnh 1) |
+### 🌟 Danh sách gửi khách (Guest Name - Link):
+
+1. **Công chúa bé Bơ** - https://xuan-minh-graduation-invitation.vercel.app/vk
+2. **Anh Nhím** - https://xuan-minh-graduation-invitation.vercel.app/anh-nhim
+3. **Chị Ái chị Hân** - https://xuan-minh-graduation-invitation.vercel.app/chi-ai-chi-han
+4. **Chú Đức** - https://xuan-minh-graduation-invitation.vercel.app/chu-duc
+5. **Ly Hoàng** - https://xuan-minh-graduation-invitation.vercel.app/ly-hoang
+6. **2fam** - https://xuan-minh-graduation-invitation.vercel.app/2fam
+7. **Hoan Hub** - https://xuan-minh-graduation-invitation.vercel.app/hoan-hub
+8. **Cừu Đen** - https://xuan-minh-graduation-invitation.vercel.app/cuu-den
+9. **Phi Linh** - https://xuan-minh-graduation-invitation.vercel.app/phi-linh
+10. **Trí Phúc** - https://xuan-minh-graduation-invitation.vercel.app/tri-phuc
+11. **Fufu** - https://xuan-minh-graduation-invitation.vercel.app/fu-fu
+12. **Papa** - https://xuan-minh-graduation-invitation.vercel.app/pa-pa
+13. **Soobin Hoàng Duy** - https://xuan-minh-graduation-invitation.vercel.app/soobin
+14. **Phương Thảo** - https://xuan-minh-graduation-invitation.vercel.app/phuong-thao
+15. **Anh Huân** - https://xuan-minh-graduation-invitation.vercel.app/anh-huan
+16. **Anh Đạt** - https://xuan-minh-graduation-invitation.vercel.app/anh-dat
+17. **Faye** - https://xuan-minh-graduation-invitation.vercel.app/faye
+18. **Chị Thảo** - https://xuan-minh-graduation-invitation.vercel.app/chi-thao
+19. **Anh Thịnh** - https://xuan-minh-graduation-invitation.vercel.app/anh-thinh
+20. **Lê Duy** - https://xuan-minh-graduation-invitation.vercel.app/le-duy
+21. **Nhẫn** - https://xuan-minh-graduation-invitation.vercel.app/nhan-tran
+22. **Minh Quân** - https://xuan-minh-graduation-invitation.vercel.app/minh-quan
+23. **Khoa** - https://xuan-minh-graduation-invitation.vercel.app/xuan-khoa
+24. **Phúc Nguyên** - https://xuan-minh-graduation-invitation.vercel.app/phuc-nguyen
+25. **Dreamwork** - https://xuan-minh-graduation-invitation.vercel.app/dreamwork
+26. **Hivane** - https://xuan-minh-graduation-invitation.vercel.app/hivane
+27. **Chip** - https://xuan-minh-graduation-invitation.vercel.app/chip
+28. **nhóc Thành** - https://xuan-minh-graduation-invitation.vercel.app/nhoc-thanh
+29. **Anh Nhân** - https://xuan-minh-graduation-invitation.vercel.app/anh-nhan
+
+---
+
+### 📊 Bảng Chi Tiết (Type & Link)
+
+| STT | Tên khách mời (Guest Name) | Loại khách | Đường link Production | Đường link Localhost |
+|:---:|---|:---:|---|---|
+| 1 | **Công chúa bé Bơ** | VIP | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/vk) | [Link Local](http://localhost:3000/vk) |
+| 2 | **Anh Nhím** | VIP | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/anh-nhim) | [Link Local](http://localhost:3000/anh-nhim) |
+| 3 | **Chị Ái chị Hân** | VIP | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/chi-ai-chi-han) | [Link Local](http://localhost:3000/chi-ai-chi-han) |
+| 4 | **Chú Đức** | VIP | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/chu-duc) | [Link Local](http://localhost:3000/chu-duc) |
+| 5 | **Ly Hoàng** | VIP | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/ly-hoang) | [Link Local](http://localhost:3000/ly-hoang) |
+| 6 | **2fam** | VIP | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/2fam) | [Link Local](http://localhost:3000/2fam) |
+| 7 | **Hoan Hub** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/hoan-hub) | [Link Local](http://localhost:3000/hoan-hub) |
+| 8 | **Cừu Đen** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/cuu-den) | [Link Local](http://localhost:3000/cuu-den) |
+| 9 | **Phi Linh** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/phi-linh) | [Link Local](http://localhost:3000/phi-linh) |
+| 10 | **Trí Phúc** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/tri-phuc) | [Link Local](http://localhost:3000/tri-phuc) |
+| 11 | **Fufu** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/fu-fu) | [Link Local](http://localhost:3000/fu-fu) |
+| 12 | **Papa** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/pa-pa) | [Link Local](http://localhost:3000/pa-pa) |
+| 13 | **Soobin Hoàng Duy** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/soobin) | [Link Local](http://localhost:3000/soobin) |
+| 14 | **Phương Thảo** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/phuong-thao) | [Link Local](http://localhost:3000/phuong-thao) |
+| 15 | **Anh Huân** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/anh-huan) | [Link Local](http://localhost:3000/anh-huan) |
+| 16 | **Anh Đạt** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/anh-dat) | [Link Local](http://localhost:3000/anh-dat) |
+| 17 | **Faye** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/faye) | [Link Local](http://localhost:3000/faye) |
+| 18 | **Chị Thảo** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/chi-thao) | [Link Local](http://localhost:3000/chi-thao) |
+| 19 | **Anh Thịnh** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/anh-thinh) | [Link Local](http://localhost:3000/anh-thinh) |
+| 20 | **Lê Duy** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/le-duy) | [Link Local](http://localhost:3000/le-duy) |
+| 21 | **Nhẫn** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/nhan-tran) | [Link Local](http://localhost:3000/nhan-tran) |
+| 22 | **Minh Quân** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/minh-quan) | [Link Local](http://localhost:3000/minh-quan) |
+| 23 | **Khoa** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/xuan-khoa) | [Link Local](http://localhost:3000/xuan-khoa) |
+| 24 | **Phúc Nguyên** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/phuc-nguyen) | [Link Local](http://localhost:3000/phuc-nguyen) |
+| 25 | **Dreamwork** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/dreamwork) | [Link Local](http://localhost:3000/dreamwork) |
+| 26 | **Hivane** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/hivane) | [Link Local](http://localhost:3000/hivane) |
+| 27 | **Chip** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/chip) | [Link Local](http://localhost:3000/chip) |
+| 28 | **nhóc Thành** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/nhoc-thanh) | [Link Local](http://localhost:3000/nhoc-thanh) |
+| 29 | **Anh Nhân** | Normal | [Link Vercel](https://xuan-minh-graduation-invitation.vercel.app/anh-nhan) | [Link Local](http://localhost:3000/anh-nhan) |
 
 > ⚠️ **Kiểm tra sửa URL:**
-> - Nếu truy cập `http://localhost:3000/` hoặc nhập link không có trong danh sách (vd: `http://localhost:3000/sai-link`), hệ thống sẽ hiển thị màn hình cảnh báo không cho phép chỉnh sửa URL và từ chối truy cập.
+> - Nếu truy cập `https://xuan-minh-graduation-invitation.vercel.app/` hoặc nhập link không có trong danh sách (vd: `/sai-link`), hệ thống sẽ hiển thị màn hình cảnh báo không cho phép chỉnh sửa URL và từ chối truy cập.
 
 ---
 

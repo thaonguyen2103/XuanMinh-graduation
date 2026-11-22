@@ -1,8 +1,9 @@
 {
   "host": {
     "name": "XMINH",
+    "phone": "+84834926699",
     "time": "2026-11-29T16:00:00+07:00",
-    "timeNote": "Thời gian chính xác sẽ cập nhật vòa ngày đó",
+    "timeNote": "Thời gian chính xác sẽ cập nhật vào ngày đó",
     "placeName": "Hội trường Trần Chí Đáo",
     "address": "Nhà Điều hành ĐHQG-HCM",
     "mapUrl": "https://maps.app.goo.gl/BmKDYihvzhGe4BBi7?g_st=ic",
@@ -55,139 +56,139 @@
       "message": "xm cảm ơn cả nhà iu vì luôn bên cạnh! Yêu cả nhà <3"
     },
     {
-      "id": "guest-01",
+      "id": "hoan-hub",
       "name": "Hoan Hub",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-02",
+      "id": "cuu-den",
       "name": "Cừu Đen",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-03",
+      "id": "phi-linh",
       "name": "Phi Linh",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-04",
+      "id": "tri-phuc",
       "name": "Trí Phúc",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-05",
+      "id": "fu-fu",
       "name": "Fufu",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-06",
+      "id": "pa-pa",
       "name": "Papa",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-07",
+      "id": "soobin",
       "name": "Soobin Hoàng Duy",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-08",
+      "id": "phuong-thao",
       "name": "Phương Thảo",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-09",
+      "id": "anh-huan",
       "name": "Anh Huân",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-10",
+      "id": "anh-dat",
       "name": "Anh Đạt",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-11",
+      "id": "faye",
       "name": "Faye",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-12",
+      "id": "chi-thao",
       "name": "Chị Thảo",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-13",
+      "id": "anh-thinh",
       "name": "Anh Thịnh",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-14",
+      "id": "le-duy",
       "name": "Lê Duy",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-15",
+      "id": "nhan-tran",
       "name": "Nhẫn",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-16",
+      "id": "minh-quan",
       "name": "Minh Quân",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-17",
+      "id": "xuan-khoa",
       "name": "Khoa",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-18",
+      "id": "phuc-nguyen",
       "name": "Phúc Nguyên",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-19",
+      "id": "dreamwork",
       "name": "Dreamwork",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-20",
+      "id": "hivane",
       "name": "Hivane",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-21",
+      "id": "chip",
       "name": "Chip",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-22",
+      "id": "nhoc-thanh",
       "name": "nhóc Thành",
       "type": "normal",
       "confirmation": false
     },
     {
-      "id": "guest-23",
+      "id": "anh-nhan",
       "name": "Anh Nhân",
       "type": "normal",
       "confirmation": false

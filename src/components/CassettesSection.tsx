@@ -3,6 +3,7 @@
 import React from 'react';
 import { HostInfo } from '@/types/invitation';
 import { CountdownTimer } from './CountdownTimer';
+import { PhoneContact } from './PhoneContact';
 
 interface CassettesSectionProps {
   host: HostInfo;
@@ -148,11 +149,16 @@ export const CassettesSection: React.FC<CassettesSectionProps> = ({ host }) => {
               <div className="note-s">
                 <span>{host.address}</span>
               </div>
-              {host.mapUrl && (
-                <a href={host.mapUrl} target="_blank" rel="noopener noreferrer">
-                  Xem bản đồ
-                </a>
-              )}
+              <div className="track-actions">
+                {host.mapUrl && (
+                  <a href={host.mapUrl} target="_blank" rel="noopener noreferrer" className="map-btn">
+                    Xem bản đồ
+                  </a>
+                )}
+                {host.phone && (
+                  <PhoneContact phone={host.phone} name={host.name} variant="badge" label="Hotline" />
+                )}
+              </div>
             </div>
             <div className="label-band"></div>
           </div>

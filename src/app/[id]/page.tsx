@@ -4,6 +4,7 @@ import { TopBar } from '@/components/TopBar';
 import { Hero } from '@/components/Hero';
 import { CassettesSection } from '@/components/CassettesSection';
 import { RSVPSection } from '@/components/RSVPSection';
+import { SaveInvitation } from '@/components/SaveInvitation';
 import { Footer } from '@/components/Footer';
 import { InvalidGuest } from '@/components/InvalidGuest';
 
@@ -46,8 +47,9 @@ export default function GuestInvitePage({ params }: PageProps) {
       <main>
         <CassettesSection host={invitationData.host} />
         <RSVPSection guest={guest} />
+        <SaveInvitation guest={guest} host={invitationData.host} />
       </main>
-      <Footer graduateName={invitationData.host.name} />
+      <Footer graduateName={invitationData.host.name} phone={invitationData.host.phone} />
     </div>
   );
 }
