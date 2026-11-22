@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Website Mời Tốt Nghiệp (Next.js + TypeScript)
 
-## Getting Started
+Dự án thiệp mời tốt nghiệp được xây dựng bằng **Next.js 14 (App Router)** và **TypeScript**, hoạt động độc lập không cần backend bên ngoài.
 
-First, run the development server:
+---
 
+## 🚀 Cách Chạy Dự Án
+
+### 1. Di chuyển vào thư mục dự án
+Mở terminal (PowerShell hoặc Command Prompt) và chạy:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd "graduation-invite"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Chạy môi trường phát triển (Development)
+```bash
+npm run dev
+```
+Sau đó mở trình duyệt và truy cập:
+👉 **[http://localhost:3000](http://localhost:3000)**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔗 Các Đường Link Mẫu Để Thử Nghiệm
 
-## Learn More
+Mỗi khách mời có một link riêng dạng `http://localhost:3000/[guest-id]`:
 
-To learn more about Next.js, take a look at the following resources:
+| Loại khách | Link truy cập | Mô tả | Ảnh sử dụng |
+|---|---|---|---|
+| **VIP** | [http://localhost:3000/vip-01](http://localhost:3000/vip-01) | GS. TS. Nguyễn Văn A (chưa xác nhận) | `/images/vip-01.png` |
+| **VIP** | [http://localhost:3000/vip-02](http://localhost:3000/vip-02) | Chị Hoàng Lan (đã xác nhận) | `/images/vip-02.png` |
+| **Normal** | [http://localhost:3000/guest-01](http://localhost:3000/guest-01) | Nguyễn Hoàng Nam | `/images/1.jpg` (ảnh 1) |
+| **Normal** | [http://localhost:3000/guest-02](http://localhost:3000/guest-02) | Trần Thị Mai | `/images/1.jpg` (ảnh 1) |
+| **Normal** | [http://localhost:3000/guest-xminh](http://localhost:3000/guest-xminh) | Bạn Thân Của Minh | `/images/1.jpg` (ảnh 1) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> ⚠️ **Kiểm tra sửa URL:**
+> - Nếu truy cập `http://localhost:3000/` hoặc nhập link không có trong danh sách (vd: `http://localhost:3000/sai-link`), hệ thống sẽ hiển thị màn hình cảnh báo không cho phép chỉnh sửa URL và từ chối truy cập.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📁 Cấu Trúc Dữ Liệu JSON
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Dữ liệu lưu tại file: `src/data/invitation.json`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```json
+{
+  "host": {
+    "name": "XMINH",
+    "time": "2026-12-20T18:00:00+07:00",
+    "timeNote": "Cửa mở từ 17:30",
+    "placeName": "Trường ĐH Khoa học Tự nhiên - ĐHQG-HCM",
+    "address": "227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM",
+    "mapUrl": "https://maps.google.com/?q=227+Nguyễn+Văn+Cừ+Quận+5+TPHCM",
+    "closing": "Thân mến,",
+    "defaultMessage": "Cảm ơn {name} đã đồng hành cùng mình suốt thời gian qua. Mình rất mong được gặp bạn trong ngày đặc biệt này."
+  },
+  "guests": [
+    {
+      "id": "vip-01",
+      "name": "GS. TS. Nguyễn Văn A",
+      "type": "vip",
+      "confirmation": false,
+      "message": "Em kính mời Thầy đến tham dự buổi lễ tốt nghiệp của em. Sự hiện diện của Thầy là niềm vinh dự lớn nhất của em!"
+    },
+    {
+      "id": "guest-01",
+      "name": "Nguyễn Hoàng Nam",
+      "type": "normal",
+      "confirmation": false
+    }
+  ]
+}
+```
+
+### Cách thức hoạt động:
+1. **Chủ nhân (`host`)**: Cấu hình họ tên, thời gian diễn ra buổi lễ, địa điểm, bản đồ, chữ ký.
+2. **Khách mời (`guests`)**:
+   - `id`: Mã định danh định tuyến URL (`/guest-id`).
+   - `name`: Tên khách mời hiển thị trên vé và thiệp.
+   - `type`: 
+     - `"normal"`: Tự động dùng ảnh 1 (`/public/images/1.jpg`).
+     - `"vip"`: Tự động dùng ảnh riêng đặt theo ID (`/public/images/[id].png`).
+   - `confirmation`: `true` hoặc `false`.
+3. **Xác nhận tham dự**:
+   - Khi khách bấm nút **"Mình sẽ đến!"**, hệ thống gọi API nội bộ Next.js `/api/rsvp` để cập nhật `confirmation: true` trực tiếp vào file `invitation.json` trên đĩa.
+   - Nút đổi thành **"Đã xác nhận ✓"**, đóng dấu mộc và kích hoạt hiệu ứng pháo giấy confetti.
+
+---
+
+## 🛠️ Build Sản Phẩm (Production)
+
+```bash
+npm run build
+npm start
+```

@@ -1,0 +1,48 @@
+{
+  "host": {
+    "name": "XMINH",
+    "time": "2026-12-20T18:00:00+07:00",
+    "timeNote": "Cửa mở từ 17:30",
+    "placeName": "Trường ĐH Khoa học Tự nhiên - ĐHQG-HCM",
+    "address": "227 Nguyễn Văn Cừ, Phường 4, Quận 5, TP.HCM",
+    "mapUrl": "https://maps.google.com/?q=227+Nguyễn+Văn+Cừ+Quận+5+TPHCM",
+    "closing": "Thân mến,",
+    "defaultMessage": "Cảm ơn {name} đã đồng hành cùng mình suốt thời gian qua. Mình rất mong được gặp bạn trong ngày đặc biệt này.",
+    "signatureImage": "/images/signature.png",
+    "signatureInvert": true
+  },
+  "guests": [
+    {
+      "id": "vip-01",
+      "name": "GS. TS. Nguyễn Văn A",
+      "type": "vip",
+      "confirmation": false,
+      "message": "Em kính mời Thầy đến tham dự buổi lễ tốt nghiệp của em. Sự hiện diện của Thầy là niềm vinh dự lớn nhất của em!"
+    },
+    {
+      "id": "vip-02",
+      "name": "Chị Hoàng Lan (VIP)",
+      "type": "vip",
+      "confirmation": true,
+      "message": "Cảm ơn chị Lan đã luôn hỗ trợ và đồng hành cùng em trong suốt chặng đường đại học."
+    },
+    {
+      "id": "guest-01",
+      "name": "Nguyễn Hoàng Nam",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-02",
+      "name": "Trần Thị Mai",
+      "type": "normal",
+      "confirmation": false
+    },
+    {
+      "id": "guest-xminh",
+      "name": "Bạn Thân Của Minh",
+      "type": "normal",
+      "confirmation": false
+    }
+  ]
+}
