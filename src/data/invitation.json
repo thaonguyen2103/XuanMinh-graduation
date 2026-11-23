@@ -155,7 +155,7 @@
       "id": "xuan-khoa",
       "name": "Khoa",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "phuc-nguyen",
