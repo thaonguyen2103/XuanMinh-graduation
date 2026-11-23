@@ -77,7 +77,7 @@
       "id": "tri-phuc",
       "name": "Trí Phúc",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "fu-fu",
