@@ -8,6 +8,10 @@ interface SaveInvitationProps {
   host: HostInfo;
 }
 
+const VIDEO_DURATION_MS = 15_000;
+const VIDEO_FPS = 30;
+const VIDEO_TOTAL_FRAMES = (VIDEO_DURATION_MS / 1000) * VIDEO_FPS;
+
 export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [isRecording, setIsRecording] = useState<boolean>(false);
@@ -129,6 +133,15 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     sigElement: HTMLCanvasElement | HTMLImageElement | null
   ) => {
     const t = (frameIndex / totalFrames) * Math.PI * 2;
+    const elapsedSeconds = (frameIndex / Math.max(totalFrames - 1, 1)) * (VIDEO_DURATION_MS / 1000);
+    const getEntrance = (start: number, duration = 1) => {
+      const progress = Math.max(0, Math.min(1, (elapsedSeconds - start) / duration));
+      const eased = 1 - Math.pow(1 - progress, 3);
+      return {
+        opacity: 0.35 + eased * 0.65,
+        offsetY: (1 - eased) * 26,
+      };
+    };
 
     // 1. NỀN DENIM RETRO
     ctx.fillStyle = '#3a6ba8';
@@ -162,7 +175,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.scale(contentScale, contentScale);
 
     // 1. EVENT BANNER UNDER THE PHOTO
+    const bannerEntrance = getEntrance(1.2);
     ctx.save();
+    ctx.globalAlpha = bannerEntrance.opacity;
+    ctx.translate(0, bannerEntrance.offsetY);
     ctx.translate(width / 2, 785);
     ctx.rotate(-0.035); // -2 deg
     ctx.fillStyle = '#0d1520';
@@ -175,7 +191,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.restore();
 
     // 2. STACKED GRADUATION TITLE
+    const titleEntrance = getEntrance(2.2);
     ctx.save();
+    ctx.globalAlpha = titleEntrance.opacity;
+    ctx.translate(0, titleEntrance.offsetY);
     ctx.textAlign = 'center';
     ctx.font = '700 42px "Anton", sans-serif';
     ctx.fillStyle = '#c9d6ea';
@@ -192,6 +211,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
 
     // 3. PHOTO STAGE (VINYL RECORD + POLAROID + GOLD STICKER)
     const stageY = 440;
+    const photoEntrance = getEntrance(0.2, 1.2);
+    ctx.save();
+    ctx.globalAlpha = photoEntrance.opacity;
+    ctx.translate(0, photoEntrance.offsetY + Math.sin(t * 2) * 3);
 
     // --- A. ĐĨA THAN XOAY (VINYL RECORD) ---
     const recordX = width / 2 + 220;
@@ -255,7 +278,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
 
     ctx.save();
     ctx.translate(photoFrameX, photoFrameY);
-    ctx.rotate(-0.038); // nghiêng -2.2 độ
+    ctx.rotate(-0.038 + Math.sin(t * 2) * 0.008);
 
     // Bóng đổ khung ảnh
     ctx.fillStyle = '#0d1520';
@@ -353,9 +376,13 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.font = '700 11px "Space Mono", monospace';
     ctx.fillText('★ 2026 ★', 0, 28, 100);
     ctx.restore();
+    ctx.restore();
 
     // 4. PERSONALIZED INVITATION TICKET
+    const ticketEntrance = getEntrance(3.2);
     ctx.save();
+    ctx.globalAlpha = ticketEntrance.opacity;
+    ctx.translate(0, ticketEntrance.offsetY + Math.sin(t * 2 + 0.8) * 2);
     const forCardY = 1280;
     ctx.translate(width / 2, forCardY);
     ctx.rotate(-0.024); // -1.4 deg
@@ -388,7 +415,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.restore();
 
     // 5. PERSONALIZED MESSAGE
+    const messageEntrance = getEntrance(4.1);
     ctx.save();
+    ctx.globalAlpha = messageEntrance.opacity;
+    ctx.translate(0, messageEntrance.offsetY);
     ctx.font = '500 26px "Be Vietnam Pro", sans-serif';
     ctx.fillStyle = '#eef3fa';
     ctx.textAlign = 'center';
@@ -422,7 +452,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     const infoBoxW = 900;
     const infoBoxH = 180;
 
+    const infoEntrance = getEntrance(5);
     ctx.save();
+    ctx.globalAlpha = infoEntrance.opacity;
+    ctx.translate(0, infoEntrance.offsetY);
     ctx.translate(width / 2, infoBoxY);
 
     // Bóng đổ hộp thông tin
@@ -484,7 +517,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.restore();
 
     // 7. CLOSING AND SIGNATURE
+    const signatureEntrance = getEntrance(6.3);
     ctx.save();
+    ctx.globalAlpha = signatureEntrance.opacity;
+    ctx.translate(0, signatureEntrance.offsetY);
     ctx.font = '700 20px "Space Mono", monospace';
     ctx.fillStyle = '#c9d6ea';
     ctx.textAlign = 'center';
@@ -499,7 +535,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.restore();
 
     // 8. FOOTER
+    const footerEntrance = getEntrance(7);
     ctx.save();
+    ctx.globalAlpha = footerEntrance.opacity;
+    ctx.translate(0, footerEntrance.offsetY);
     ctx.font = '700 16px "Space Mono", monospace';
     ctx.fillStyle = '#7fa6d6';
     ctx.textAlign = 'center';
@@ -564,7 +603,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
       if (previewCanvasRef.current) {
         const pCtx = previewCanvasRef.current.getContext('2d');
         if (pCtx) {
-          renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, 0, 450, photoImg, sigElement);
+          renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, VIDEO_TOTAL_FRAMES - 1, VIDEO_TOTAL_FRAMES, photoImg, sigElement);
           pCtx.clearRect(0, 0, previewCanvasRef.current.width, previewCanvasRef.current.height);
           pCtx.drawImage(canvas, 0, 0, previewCanvasRef.current.width, previewCanvasRef.current.height);
         }
@@ -578,7 +617,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
         // Fallback: Thiết bị không hỗ trợ MediaRecorder (ví dụ trình duyệt webview rất cũ)
         // -> Xuất ảnh tĩnh PNG chất lượng cao
         setStatusText('Trình duyệt không hỗ trợ quay video, đang tạo ảnh PNG chất lượng cao…');
-        renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, 0, 450, photoImg, sigElement);
+        renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, VIDEO_TOTAL_FRAMES - 1, VIDEO_TOTAL_FRAMES, photoImg, sigElement);
         canvas.toBlob((blob) => {
           if (!blob) throw new Error('Could not export canvas blob');
           const url = URL.createObjectURL(blob);
@@ -626,9 +665,9 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
         }
       };
 
-      const videoDurationMs = 15_000;
-      const frameRate = 30;
-      const totalFrames = (videoDurationMs / 1000) * frameRate;
+      const videoDurationMs = VIDEO_DURATION_MS;
+      const frameRate = VIDEO_FPS;
+      const totalFrames = VIDEO_TOTAL_FRAMES;
       let lastRenderedFrame = -1;
       let startTime = 0;
 
@@ -763,7 +802,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
       const ctx = canvas.getContext('2d');
       if (!ctx) return;
 
-      renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, 0, 90, photoImg, sigElement);
+      renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, VIDEO_TOTAL_FRAMES - 1, VIDEO_TOTAL_FRAMES, photoImg, sigElement);
 
       canvas.toBlob((blob) => {
         if (!blob) return;
