@@ -149,50 +149,48 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.fillStyle = vignette;
     ctx.fillRect(0, 0, width, height);
 
-    // Keep invitation content inside Instagram Story's safe area.
-    const contentScale = 0.8;
+    // Keep the poster centered within Instagram Story's safe area.
+    const contentScale = 0.84;
     ctx.save();
-    ctx.translate((width * (1 - contentScale)) / 2, height * 0.1);
+    ctx.translate((width * (1 - contentScale)) / 2, height * 0.06);
     ctx.scale(contentScale, contentScale);
 
-    // 2. KICKER BANNER TRÊN CÙNG
+    // 1. EVENT BANNER UNDER THE PHOTO
     ctx.save();
-    ctx.translate(width / 2, 85);
+    ctx.translate(width / 2, 785);
     ctx.rotate(-0.035); // -2 deg
     ctx.fillStyle = '#0d1520';
-    ctx.fillRect(-320, -20, 640, 40);
-    ctx.font = '700 19px "Space Mono", monospace';
+    ctx.fillRect(-470, -28, 940, 56);
+    ctx.font = '700 22px "Space Mono", monospace';
     ctx.fillStyle = '#eef3fa';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('GRADUATION PARTY · CHỈ DÀNH CHO KHÁCH MỜI', 0, 0, 610);
+    ctx.fillText('GRADUATION PARTY · CHỈ DÀNH CHO KHÁCH MỜI', 0, 0, 900);
     ctx.restore();
 
-    // 3. TIÊU ĐỀ LỄ TỐT NGHIỆP
+    // 2. STACKED GRADUATION TITLE
     ctx.save();
     ctx.textAlign = 'center';
-    // Chữ "LỄ"
-    ctx.font = '700 40px "Anton", sans-serif';
+    ctx.font = '700 42px "Anton", sans-serif';
     ctx.fillStyle = '#c9d6ea';
-    ctx.fillText('LỄ', width / 2, 168);
+    ctx.fillText('LỄ', width / 2, 895);
 
-    // Chữ "TỐT NGHIỆP"
-    ctx.font = '400 115px "Anton", sans-serif';
-    // Bóng đổ đậm retro
+    ctx.font = '400 118px "Anton", sans-serif';
     ctx.fillStyle = '#0d1520';
-    ctx.fillText('TỐT NGHIỆP', width / 2 + 6, 265 + 6, 900);
-    // Chữ chính
+    ctx.fillText('TỐT', width / 2 + 7, 1010 + 7, 650);
+    ctx.fillText('NGHIỆP', width / 2 + 7, 1120 + 7, 760);
     ctx.fillStyle = '#eef3fa';
-    ctx.fillText('TỐT NGHIỆP', width / 2, 265, 900);
+    ctx.fillText('TỐT', width / 2, 1010, 650);
+    ctx.fillText('NGHIỆP', width / 2, 1120, 760);
     ctx.restore();
 
-    // 4. SÂN KHẤU (ĐĨA THAN + KHUNG ẢNH POLAROID + STICKER VÀNG)
-    const stageY = 575;
+    // 3. PHOTO STAGE (VINYL RECORD + POLAROID + GOLD STICKER)
+    const stageY = 440;
 
     // --- A. ĐĨA THAN XOAY (VINYL RECORD) ---
-    const recordX = width / 2 + 130;
-    const recordY = stageY - 25;
-    const recordRadius = 210;
+    const recordX = width / 2 + 220;
+    const recordY = stageY - 15;
+    const recordRadius = 235;
 
     ctx.save();
     ctx.translate(recordX, recordY);
@@ -244,10 +242,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.restore();
 
     // --- B. KHUNG ẢNH POLAROID ---
-    const photoFrameX = width / 2 - 80;
+    const photoFrameX = width / 2;
     const photoFrameY = stageY;
-    const photoCardW = 380;
-    const photoCardH = 460;
+    const photoCardW = 820;
+    const photoCardH = 560;
 
     ctx.save();
     ctx.translate(photoFrameX, photoFrameY);
@@ -315,7 +313,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.restore();
 
     // --- C. STICKER HUY HIỆU VÀNG (FLOATING GOLD STICKER) ---
-    const stickerBaseX = width / 2 + 160;
+    const stickerBaseX = width / 2 + 320;
     const stickerBaseY = stageY - 180;
     const floatY = Math.sin(t) * 8;
     const floatRot = 0.18 + Math.sin(t) * 0.08;
@@ -350,63 +348,73 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.fillText('★ 2026 ★', 0, 28, 100);
     ctx.restore();
 
-    // 5. THẺ VÉ MỜI "VÉ MỜI DÀNH CHO: TÊN KHÁCH"
+    // 4. PERSONALIZED INVITATION TICKET
     ctx.save();
-    const forCardY = 880;
+    const forCardY = 1280;
     ctx.translate(width / 2, forCardY);
     ctx.rotate(-0.024); // -1.4 deg
 
     // Bóng đổ thẻ
     ctx.fillStyle = '#0d1520';
-    ctx.fillRect(-300 + 5, -50 + 5, 600, 100);
+    ctx.fillRect(-390 + 6, -72 + 6, 780, 144);
 
     // Thân giấy thẻ
     ctx.fillStyle = '#eef3fa';
-    ctx.fillRect(-300, -50, 600, 100);
+    ctx.fillRect(-390, -72, 780, 144);
 
     // Miếng băng dính trên thẻ
     ctx.fillStyle = 'rgba(201, 214, 234, 0.88)';
-    ctx.fillRect(-45, -62, 90, 20);
+    ctx.fillRect(-52, -84, 104, 24);
     ctx.strokeStyle = 'rgba(0, 0, 0, 0.15)';
-    ctx.strokeRect(-45, -62, 90, 20);
+    ctx.strokeRect(-52, -84, 104, 24);
 
     // Dòng chữ "VÉ MỜI DÀNH CHO"
-    ctx.font = '700 15px "Space Mono", monospace';
+    ctx.font = '700 19px "Space Mono", monospace';
     ctx.fillStyle = '#3b5483';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('VÉ MỜI DÀNH CHO', 0, -18);
+    ctx.fillText('VÉ MỜI DÀNH CHO', 0, -24);
 
     // Tên khách mời Anton
-    ctx.font = '400 44px "Anton", sans-serif';
+    ctx.font = '400 58px "Anton", sans-serif';
     ctx.fillStyle = '#0d1520';
-    ctx.fillText(guest.name.toUpperCase(), 0, 20, 560);
+    ctx.fillText(guest.name.toUpperCase(), 0, 30, 740);
     ctx.restore();
 
-    // 6. LỜI NHẮC / LỜI CẢM ƠN (PERSONALIZED MESSAGE)
+    // 5. PERSONALIZED MESSAGE
     ctx.save();
-    ctx.font = '500 24px "Be Vietnam Pro", sans-serif';
+    ctx.font = '500 26px "Be Vietnam Pro", sans-serif';
     ctx.fillStyle = '#eef3fa';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    drawWrappedText(ctx, personalizedMessage, width / 2, 1005, 840, 38);
+    drawWrappedText(ctx, personalizedMessage, width / 2, 1410, 850, 38);
     ctx.restore();
 
-    // 7. ⭐⭐⭐ KHỐI THÔNG TIN SỰ KIỆN: THỜI GIAN & ĐỊA ĐIỂM ⭐⭐⭐
+    // 6. EVENT DATE, TIME, AND PLACE
     let dateStr = '29.11.2026';
     let timeStr = '16:00';
     let weekdayStr = 'Chủ Nhật';
     try {
       const d = new Date(host.time);
-      dateStr = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
-      timeStr = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+      dateStr = new Intl.DateTimeFormat('vi-VN', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        timeZone: 'Asia/Ho_Chi_Minh',
+      }).format(d);
+      timeStr = new Intl.DateTimeFormat('vi-VN', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+        timeZone: 'Asia/Ho_Chi_Minh',
+      }).format(d);
       weekdayStr = new Intl.DateTimeFormat('vi-VN', { weekday: 'long', timeZone: 'Asia/Ho_Chi_Minh' }).format(d);
       weekdayStr = weekdayStr.charAt(0).toUpperCase() + weekdayStr.slice(1);
     } catch {}
 
-    const infoBoxY = 1195;
+    const infoBoxY = 1570;
     const infoBoxW = 900;
-    const infoBoxH = 175;
+    const infoBoxH = 180;
 
     ctx.save();
     ctx.translate(width / 2, infoBoxY);
@@ -469,28 +477,27 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
 
     ctx.restore();
 
-    // 8. ⭐⭐⭐ LỜI KẾT & CHỮ KÝ TO ĐẸP ⭐⭐⭐
+    // 7. CLOSING AND SIGNATURE
     ctx.save();
     ctx.font = '700 20px "Space Mono", monospace';
     ctx.fillStyle = '#c9d6ea';
     ctx.textAlign = 'center';
-    ctx.fillText((host.closing || 'THÂN MẾN,').toUpperCase(), width / 2, 1375);
+    ctx.fillText((host.closing || 'THÂN MẾN,').toUpperCase(), width / 2, 1700, 840);
 
     if (sigElement) {
-      // Chữ ký to lên theo yêu cầu (sigH = 135 thay vì 88)
-      const sigH = 135;
+      const sigH = 110;
       const sigRatio = (sigElement.width || 200) / (sigElement.height || 124);
       const sigW = sigH * sigRatio;
-      ctx.drawImage(sigElement, width / 2 - sigW / 2, 1405, sigW, sigH);
+      ctx.drawImage(sigElement, width / 2 - sigW / 2, 1720, sigW, sigH);
     }
     ctx.restore();
 
-    // 9. CHÂN TRANG THIỆP MỜI
+    // 8. FOOTER
     ctx.save();
     ctx.font = '700 16px "Space Mono", monospace';
     ctx.fillStyle = '#7fa6d6';
     ctx.textAlign = 'center';
-    ctx.fillText(`CLASS OF 2026 · ${host.name.toUpperCase()} GRADUATION GIG`, width / 2, 1830);
+    ctx.fillText(`CLASS OF 2026 · ${host.name.toUpperCase()} GRADUATION GIG`, width / 2, 1875, 1000);
     ctx.restore();
 
     ctx.restore();

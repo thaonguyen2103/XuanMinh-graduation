@@ -25,9 +25,18 @@ export const CassettesSection: React.FC<CassettesSectionProps> = ({ host }) => {
   };
 
   const dayNum = fmt({ day: '2-digit' });
-  const monthYear = `Tháng ${fmt({ month: 'numeric' })} · ${fmt({ year: 'numeric' })}`;
+  const monthNumber = Number(fmt({ month: 'numeric' }));
+  const yearNumber = Number(fmt({ year: 'numeric' }));
+  const monthYear = `Tháng ${monthNumber} · ${yearNumber}`;
   const weekday = fmt({ weekday: 'long' });
   const timeStr = fmt({ hour: '2-digit', minute: '2-digit', hour12: false });
+  const firstWeekday = (new Date(Date.UTC(yearNumber, monthNumber - 1, 1)).getUTCDay() + 6) % 7;
+  const daysInMonth = new Date(Date.UTC(yearNumber, monthNumber, 0)).getUTCDate();
+  const calendarDays = Array.from({ length: 42 }, (_, index) => {
+    const day = index - firstWeekday + 1;
+    return day > 0 && day <= daysInMonth ? day : null;
+  });
+  const weekdayLabels = ['T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'CN'];
 
   return (
     <section className="tickets" id="ticketsSection" aria-label="Thông tin buổi lễ">
@@ -63,13 +72,32 @@ export const CassettesSection: React.FC<CassettesSectionProps> = ({ host }) => {
                 Track <b>01</b>
               </span>
             </div>
-            <div className="trk">
+            <div className="trk date-track">
               <div className="lbl mono">A1 · Ngày</div>
-              <div className="big date-num">{dayNum}</div>
-              <div className="note-s">
-                <strong>{monthYear}</strong>
-                <br />
-                <span>{weekday}</span>
+              <div className="date-calendar-content">
+                <div className="date-highlight">
+                  <div className="big date-num">{dayNum}</div>
+                  <div className="note-s">
+                    <strong>{monthYear}</strong>
+                    <span>{weekday}</span>
+                  </div>
+                </div>
+                <div className="mini-calendar" aria-label={`Lịch ${monthYear}`}>
+                  <div className="mini-calendar-title mono">{monthYear}</div>
+                  <div className="mini-calendar-grid">
+                    {weekdayLabels.map((label) => (
+                      <span className="mini-calendar-weekday" key={label}>{label}</span>
+                    ))}
+                    {calendarDays.map((day, index) => (
+                      <span
+                        className={`mini-calendar-day${day === Number(dayNum) ? ' event-day' : ''}`}
+                        key={index}
+                      >
+                        {day || ''}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
             <div className="label-band"></div>
