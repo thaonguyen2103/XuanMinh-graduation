@@ -113,7 +113,7 @@
       "id": "anh-dat",
       "name": "Anh Đạt",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "faye",
