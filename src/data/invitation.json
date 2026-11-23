@@ -83,7 +83,7 @@
       "id": "fu-fu",
       "name": "Fufu",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "pa-pa",
@@ -107,7 +107,7 @@
       "id": "anh-huan",
       "name": "Anh Huân",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "anh-dat",
