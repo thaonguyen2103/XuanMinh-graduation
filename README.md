@@ -142,12 +142,22 @@ Dữ liệu lưu tại file: `src/data/invitation.json`
      - `"vip"`: Tự động dùng ảnh riêng đặt theo ID (`/public/images/[id].png`).
    - `confirmation`: `true` hoặc `false`.
 3. **Xác nhận tham dự**:
-   - Khi khách bấm nút **"Mình sẽ đến!"**, hệ thống gọi API nội bộ Next.js `/api/rsvp` để cập nhật `confirmation: true` trực tiếp vào file `invitation.json` trên đĩa.
+   - Khi khách bấm nút **"Mình sẽ đến!"**, API `/api/rsvp` cập nhật `confirmation: true` trong `src/data/invitation.json` trên nhánh GitHub đã cấu hình.
    - Nút đổi thành **"Đã xác nhận ✓"**, đóng dấu mộc và kích hoạt hiệu ứng pháo giấy confetti.
 
 ---
 
 ## 🛠️ Build Sản Phẩm (Production)
+
+### Cấu hình lưu RSVP trên Vercel
+
+Vercel không lưu bền các thay đổi ghi trực tiếp vào file trong thư mục deploy. Để RSVP được ghi vào JSON, cấu hình các Environment Variables sau trong Vercel:
+
+- `GITHUB_TOKEN`: Fine-grained GitHub token có quyền **Contents: Read and write** trên repository này.
+- `GITHUB_REPOSITORY`: `thaonguyen2103/XuanMinh-graduation`
+- `GITHUB_BRANCH`: `main` (tùy chọn; mặc định là `main`)
+
+Sau khi thêm hoặc thay đổi biến môi trường, redeploy ứng dụng. Mỗi RSVP sẽ tạo một commit cập nhật file JSON; nếu Vercel tự deploy khi nhánh này có commit mới, mỗi RSVP cũng sẽ kích hoạt một deployment.
 
 ```bash
 npm run build

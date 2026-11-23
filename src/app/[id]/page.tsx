@@ -17,7 +17,7 @@ interface PageProps {
 export const dynamic = 'force-dynamic';
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const guest = getGuestById(params.id);
+  const guest = await getGuestById(params.id);
   if (!guest) {
     return {
       title: 'Thiệp mời không hợp lệ',
@@ -30,10 +30,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default function GuestInvitePage({ params }: PageProps) {
+export default async function GuestInvitePage({ params }: PageProps) {
   const { id } = params;
-  const invitationData = getInvitationData();
-  const guest = getGuestById(id);
+  const [invitationData, guest] = await Promise.all([
+    getInvitationData(),
+    getGuestById(id),
+  ]);
 
   // If the guest is not found or url has been modified to an invalid ID
   if (!guest) {

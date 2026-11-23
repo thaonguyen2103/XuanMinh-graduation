@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = confirmGuestAttendance(id);
+    const result = await confirmGuestAttendance(id);
 
     if (!result.success) {
       return NextResponse.json(
@@ -49,7 +49,7 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const guest = getGuestById(id);
+  const guest = await getGuestById(id);
   if (!guest) {
     return NextResponse.json(
       { ok: false, error: 'Không tìm thấy khách mời.' },

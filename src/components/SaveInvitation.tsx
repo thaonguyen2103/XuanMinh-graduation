@@ -149,6 +149,12 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.fillStyle = vignette;
     ctx.fillRect(0, 0, width, height);
 
+    // Keep invitation content inside Instagram Story's safe area.
+    const contentScale = 0.75;
+    ctx.save();
+    ctx.translate((width * (1 - contentScale)) / 2, height * 0.115);
+    ctx.scale(contentScale, contentScale);
+
     // 2. KICKER BANNER TRÊN CÙNG
     ctx.save();
     ctx.translate(width / 2, 85);
@@ -485,6 +491,8 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.fillStyle = '#7fa6d6';
     ctx.textAlign = 'center';
     ctx.fillText(`CLASS OF 2026 · ${host.name.toUpperCase()} GRADUATION GIG`, width / 2, 1830);
+    ctx.restore();
+
     ctx.restore();
   };
 
