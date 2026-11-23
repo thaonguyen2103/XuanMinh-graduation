@@ -89,7 +89,7 @@
       "id": "pa-pa",
       "name": "Papa",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "soobin",
