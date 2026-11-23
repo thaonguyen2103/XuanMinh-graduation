@@ -71,7 +71,7 @@
       "id": "phi-linh",
       "name": "Phi Linh",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "tri-phuc",
