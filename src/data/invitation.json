@@ -131,7 +131,7 @@
       "id": "anh-thinh",
       "name": "Anh Thịnh",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "le-duy",
