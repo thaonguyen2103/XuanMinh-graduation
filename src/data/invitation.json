@@ -125,7 +125,7 @@
       "id": "chi-thao",
       "name": "Chị Thảo",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "anh-thinh",
