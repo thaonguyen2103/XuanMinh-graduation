@@ -185,7 +185,7 @@
       "id": "nhoc-thanh",
       "name": "nhóc Thành",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "anh-nhan",
