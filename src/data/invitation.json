@@ -191,7 +191,7 @@
       "id": "anh-nhan",
       "name": "Anh Nhân",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     }
   ]
 }
