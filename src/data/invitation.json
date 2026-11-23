@@ -83,7 +83,7 @@
       "id": "fu-fu",
       "name": "Fufu",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "pa-pa",
