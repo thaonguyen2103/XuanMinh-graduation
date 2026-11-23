@@ -149,7 +149,7 @@
       "id": "minh-quan",
       "name": "Minh Quân",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "xuan-khoa",
