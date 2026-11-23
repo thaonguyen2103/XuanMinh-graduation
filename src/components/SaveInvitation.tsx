@@ -150,9 +150,9 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.fillRect(0, 0, width, height);
 
     // Keep invitation content inside Instagram Story's safe area.
-    const contentScale = 0.75;
+    const contentScale = 0.8;
     ctx.save();
-    ctx.translate((width * (1 - contentScale)) / 2, height * 0.115);
+    ctx.translate((width * (1 - contentScale)) / 2, height * 0.1);
     ctx.scale(contentScale, contentScale);
 
     // 2. KICKER BANNER TRÊN CÙNG
@@ -165,7 +165,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.fillStyle = '#eef3fa';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('GRADUATION PARTY · CHỈ DÀNH CHO KHÁCH MỜI', 0, 0);
+    ctx.fillText('GRADUATION PARTY · CHỈ DÀNH CHO KHÁCH MỜI', 0, 0, 610);
     ctx.restore();
 
     // 3. TIÊU ĐỀ LỄ TỐT NGHIỆP
@@ -180,10 +180,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.font = '400 115px "Anton", sans-serif';
     // Bóng đổ đậm retro
     ctx.fillStyle = '#0d1520';
-    ctx.fillText('TỐT NGHIỆP', width / 2 + 6, 265 + 6);
+    ctx.fillText('TỐT NGHIỆP', width / 2 + 6, 265 + 6, 900);
     // Chữ chính
     ctx.fillStyle = '#eef3fa';
-    ctx.fillText('TỐT NGHIỆP', width / 2, 265);
+    ctx.fillText('TỐT NGHIỆP', width / 2, 265, 900);
     ctx.restore();
 
     // 4. SÂN KHẤU (ĐĨA THAN + KHUNG ẢNH POLAROID + STICKER VÀNG)
@@ -303,7 +303,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.fillStyle = '#0d1520';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('CLASS OF 2026 · MỘT CHƯƠNG MỚI →', 0, photoCardH / 2 - 22);
+    ctx.fillText('CLASS OF 2026 · MỘT CHƯƠNG MỚI →', 0, photoCardH / 2 - 22, photoCardW - 32);
 
     // Miếng băng dính dán đỉnh ảnh
     ctx.fillStyle = 'rgba(201, 214, 234, 0.9)';
@@ -344,10 +344,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.font = '400 22px "Anton", sans-serif';
-    ctx.fillText('ONLY ONCE', 0, -20);
-    ctx.fillText('IN LIFE', 0, 4);
+    ctx.fillText('ONLY ONCE', 0, -20, 100);
+    ctx.fillText('IN LIFE', 0, 4, 100);
     ctx.font = '700 11px "Space Mono", monospace';
-    ctx.fillText('★ 2026 ★', 0, 28);
+    ctx.fillText('★ 2026 ★', 0, 28, 100);
     ctx.restore();
 
     // 5. THẺ VÉ MỜI "VÉ MỜI DÀNH CHO: TÊN KHÁCH"
@@ -380,7 +380,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     // Tên khách mời Anton
     ctx.font = '400 44px "Anton", sans-serif';
     ctx.fillStyle = '#0d1520';
-    ctx.fillText(guest.name.toUpperCase(), 0, 20);
+    ctx.fillText(guest.name.toUpperCase(), 0, 20, 560);
     ctx.restore();
 
     // 6. LỜI NHẮC / LỜI CẢM ƠN (PERSONALIZED MESSAGE)
@@ -444,12 +444,12 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     // Giờ & Ngày Anton
     ctx.font = '400 36px "Anton", sans-serif';
     ctx.fillStyle = '#ffffff';
-    ctx.fillText(`${timeStr} · ${dateStr}`, -infoBoxW / 4, 2);
+    ctx.fillText(`${timeStr} · ${dateStr}`, -infoBoxW / 4, 2, 410);
 
     // Thứ / Ghi chú
     ctx.font = '500 17px "Be Vietnam Pro", sans-serif';
     ctx.fillStyle = '#c9d6ea';
-    ctx.fillText(`${weekdayStr} (${host.timeNote || 'Cửa mở trước 30p'})`, -infoBoxW / 4, 44);
+    ctx.fillText(`${weekdayStr} (${host.timeNote || 'Cửa mở trước 30p'})`, -infoBoxW / 4, 44, 410);
 
     // --- CỘT PHẢI: ĐỊA ĐIỂM ---
     // Nhãn
@@ -460,12 +460,12 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     // Tên hội trường
     ctx.font = '400 30px "Anton", sans-serif';
     ctx.fillStyle = '#ffffff';
-    ctx.fillText(host.placeName || 'Hội trường Trần Chí Đáo', infoBoxW / 4, 2);
+    ctx.fillText(host.placeName || 'Hội trường Trần Chí Đáo', infoBoxW / 4, 2, 410);
 
     // Địa chỉ chi tiết
     ctx.font = '500 17px "Be Vietnam Pro", sans-serif';
     ctx.fillStyle = '#c9d6ea';
-    ctx.fillText(host.address || 'Nhà Điều hành ĐHQG-HCM', infoBoxW / 4, 44);
+    ctx.fillText(host.address || 'Nhà Điều hành ĐHQG-HCM', infoBoxW / 4, 44, 410);
 
     ctx.restore();
 
