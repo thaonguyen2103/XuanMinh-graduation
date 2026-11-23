@@ -16,9 +16,11 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [downloadFilename, setDownloadFilename] = useState<string>('');
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [isInAppBrowser, setIsInAppBrowser] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const downloadBlobRef = useRef<Blob | null>(null);
 
   const personalizedMessage = (guest.message || host.defaultMessage).replace(/\{name\}/g, guest.name);
 
@@ -28,6 +30,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     ? `/images/guest-imgs/${guest.id}.jpg` 
     : defaultPhotoSrc;
   const signatureSrc = host.signatureImage || '/images/signature.png';
+
+  useEffect(() => {
+    setIsInAppBrowser(/FBAN|FBAV|Instagram|Messenger/i.test(navigator.userAgent));
+  }, []);
 
   // Helper to load image
   const loadImage = (src: string): Promise<HTMLImageElement> => {
@@ -511,6 +517,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
     setIsSuccess(false);
     setErrorMessage(null);
     setDownloadUrl(null);
+    downloadBlobRef.current = null;
     setStatusText('Đang nạp ảnh và phông chữ thiệp mời…');
 
     try {
@@ -557,7 +564,7 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
       if (previewCanvasRef.current) {
         const pCtx = previewCanvasRef.current.getContext('2d');
         if (pCtx) {
-          renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, 0, 90, photoImg, sigElement);
+          renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, 0, 450, photoImg, sigElement);
           pCtx.clearRect(0, 0, previewCanvasRef.current.width, previewCanvasRef.current.height);
           pCtx.drawImage(canvas, 0, 0, previewCanvasRef.current.width, previewCanvasRef.current.height);
         }
@@ -571,23 +578,27 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
         // Fallback: Thiết bị không hỗ trợ MediaRecorder (ví dụ trình duyệt webview rất cũ)
         // -> Xuất ảnh tĩnh PNG chất lượng cao
         setStatusText('Trình duyệt không hỗ trợ quay video, đang tạo ảnh PNG chất lượng cao…');
-        renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, 0, 90, photoImg, sigElement);
+        renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, 0, 450, photoImg, sigElement);
         canvas.toBlob((blob) => {
           if (!blob) throw new Error('Could not export canvas blob');
           const url = URL.createObjectURL(blob);
           const filename = `Thiep-Moi-Tot-Nghiep-${guest.name.replace(/\s+/g, '_')}.png`;
+          downloadBlobRef.current = blob;
           setDownloadUrl(url);
           setDownloadFilename(filename);
           setIsSuccess(true);
           setIsRecording(false);
           setProgress(100);
-          setStatusText('Đã tạo ảnh thiệp mời (PNG) chất lượng cao thành công!');
+          setStatusText(isInAppBrowser
+            ? 'Đã tạo ảnh PNG. Hãy mở link bằng Safari/Chrome để tải ảnh.'
+            : 'Đã tạo ảnh thiệp mời (PNG) chất lượng cao thành công!');
 
-          // Tự động tải xuống
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = filename;
-          a.click();
+          if (!isInAppBrowser) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+          }
         }, 'image/png');
         return;
       }
@@ -615,9 +626,11 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
         }
       };
 
-      const totalFrames = 90; // 3 giây ở 30 FPS (1 vòng quay trọn vẹn 360 độ của đĩa than)
-      let currentFrame = 0;
-      const frameDelayMs = 1000 / 30; // ~33ms mỗi frame
+      const videoDurationMs = 15_000;
+      const frameRate = 30;
+      const totalFrames = (videoDurationMs / 1000) * frameRate;
+      let lastRenderedFrame = -1;
+      let startTime = 0;
 
       recorder.onstop = () => {
         const ext = selectedMimeType.includes('mp4') ? 'mp4' : 'webm';
@@ -625,32 +638,44 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
         const url = URL.createObjectURL(blob);
         const filename = `Thiep-Moi-Tot-Nghiep-${guest.name.replace(/\s+/g, '_')}.${ext}`;
 
+        downloadBlobRef.current = blob;
         setDownloadUrl(url);
         setDownloadFilename(filename);
         setIsSuccess(true);
         setIsRecording(false);
         setProgress(100);
-        setStatusText('Tạo video thành công! Đang tự động lưu về máy…');
+        setStatusText(isInAppBrowser
+          ? 'Video 15 giây đã sẵn sàng. Nhấn CHIA SẺ VIDEO để lưu hoặc mở link bằng Safari/Chrome.'
+          : 'Tạo video 15 giây thành công! Đang tự động lưu về máy…');
 
-        // Tự động kích hoạt tải xuống
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = filename;
-        a.click();
+        if (!isInAppBrowser) {
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = filename;
+          a.click();
+        }
+        stream.getTracks().forEach((track) => track.stop());
       };
 
       recorder.start();
-      setStatusText('Đang dựng video thiệp mời… (3 giây)');
+      startTime = performance.now();
+      setStatusText('Đang dựng video thiệp mời… (15 giây)');
 
-      // Vòng lặp vẽ từng khung hình theo thời gian thực
       const processFrame = () => {
-        if (currentFrame >= totalFrames) {
+        const elapsed = performance.now() - startTime;
+        if (elapsed >= videoDurationMs) {
           setStatusText('Đang đóng gói file video…');
           recorder.stop();
           return;
         }
 
-        renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, currentFrame, totalFrames, photoImg, sigElement);
+        const nextFrame = Math.min(Math.floor((elapsed / 1000) * frameRate), totalFrames - 1);
+        if (nextFrame === lastRenderedFrame) {
+          requestAnimationFrame(processFrame);
+          return;
+        }
+        lastRenderedFrame = nextFrame;
+        renderInvitationFrame(ctx, CANVAS_W, CANVAS_H, nextFrame, totalFrames, photoImg, sigElement);
 
         // Cập nhật live preview trong modal
         if (previewCanvasRef.current) {
@@ -661,11 +686,10 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
           }
         }
 
-        currentFrame++;
-        const pct = Math.round((currentFrame / totalFrames) * 95);
+        const pct = Math.round(((nextFrame + 1) / totalFrames) * 95);
         setProgress(pct);
 
-        setTimeout(processFrame, frameDelayMs);
+        requestAnimationFrame(processFrame);
       };
 
       processFrame();
@@ -684,6 +708,34 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
       a.href = downloadUrl;
       a.download = downloadFilename;
       a.click();
+    }
+  };
+
+  const handleShareVideo = async () => {
+    const blob = downloadBlobRef.current;
+    if (!blob || !downloadFilename) {
+      setErrorMessage('Video chưa sẵn sàng để chia sẻ.');
+      return;
+    }
+
+    try {
+      const file = new File([blob], downloadFilename, { type: blob.type || 'video/mp4' });
+      if (!navigator.share || !navigator.canShare?.({ files: [file] })) {
+        setErrorMessage('Trình duyệt này không hỗ trợ chia sẻ video. Hãy mở link bằng Safari hoặc Chrome để tải.');
+        return;
+      }
+
+      await navigator.share({
+        files: [file],
+        title: 'Video thiệp mời tốt nghiệp',
+        text: `Thiệp mời tốt nghiệp của ${guest.name}`,
+      });
+      setErrorMessage(null);
+      setStatusText('Đã mở menu chia sẻ. Chọn lưu video vào thiết bị.');
+    } catch (error) {
+      if (error instanceof DOMException && error.name === 'AbortError') return;
+      console.error('Error sharing invitation video:', error);
+      setErrorMessage('Không thể chia sẻ video trong trình duyệt này. Hãy mở link bằng Safari hoặc Chrome để tải.');
     }
   };
 
@@ -796,17 +848,29 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
 
             <div className="video-export-kicker mono">XUẤT VIDEO THIỆP MỜI</div>
             <h3 className="video-export-title">
-              {isSuccess ? 'ĐÃ TẢI XUỐNG VIDEO!' : 'ĐANG DỰNG VIDEO THIỆP MỜI'}
+              {isSuccess
+                ? downloadFilename.endsWith('.png') ? 'ẢNH SẴN SÀNG!' : 'VIDEO SẴN SÀNG!'
+                : 'ĐANG DỰNG VIDEO THIỆP MỜI'}
             </h3>
 
             {/* Live Canvas Preview */}
             <div className="video-preview-wrapper">
-              <canvas
-                ref={previewCanvasRef}
-                width={270}
-                height={480}
-                className="video-preview-canvas"
-              />
+              {isSuccess && downloadUrl && /\.(mp4|webm)$/i.test(downloadFilename) ? (
+                <video
+                  className="video-preview-canvas"
+                  src={downloadUrl}
+                  controls
+                  playsInline
+                  preload="metadata"
+                />
+              ) : (
+                <canvas
+                  ref={previewCanvasRef}
+                  width={270}
+                  height={480}
+                  className="video-preview-canvas"
+                />
+              )}
               {isRecording && (
                 <div className="video-recording-badge mono">
                   <span className="recording-dot"></span> REC (30 FPS)
@@ -830,23 +894,38 @@ export const SaveInvitation: React.FC<SaveInvitationProps> = ({ guest, host }) =
               <p className="video-export-error">{errorMessage}</p>
             )}
 
+            {isInAppBrowser && (
+              <p className="video-export-help">
+                Bạn đang mở link trong Messenger/Instagram. Hãy dùng nút chia sẻ để lưu video; nếu không có tùy chọn lưu, mở link này bằng Safari hoặc Chrome.
+              </p>
+            )}
+
             {/* Các nút hành động khi hoàn thành */}
             {isSuccess && (
               <div className="video-export-actions">
                 <button
                   type="button"
                   className="video-action-btn primary-btn mono"
-                  onClick={handleDownloadAgain}
+                  onClick={handleShareVideo}
                 >
-                  📥 TẢI LẠI VIDEO
+                  📤 {downloadFilename.endsWith('.png') ? 'CHIA SẺ ẢNH' : 'CHIA SẺ / LƯU VIDEO'}
                 </button>
                 <button
                   type="button"
                   className="video-action-btn secondary-btn mono"
-                  onClick={handleDownloadPNG}
+                  onClick={handleDownloadAgain}
                 >
-                  📸 LƯU ẢNH (PNG)
+                  📥 TẢI LẠI FILE
                 </button>
+                {!downloadFilename.endsWith('.png') && (
+                  <button
+                    type="button"
+                    className="video-action-btn secondary-btn mono"
+                    onClick={handleDownloadPNG}
+                  >
+                    📸 LƯU ẢNH (PNG)
+                  </button>
+                )}
                 <button
                   type="button"
                   className="video-action-btn close-btn mono"

@@ -2256,6 +2256,13 @@ footer b {
   margin-bottom: 16px;
 }
 
+.video-export-help {
+  color: #2b3e5e;
+  font-size: 12px;
+  line-height: 1.5;
+  margin: -4px 0 16px;
+}
+
 .video-export-actions {
   display: flex;
   flex-direction: column;
