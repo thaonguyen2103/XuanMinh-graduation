@@ -101,7 +101,7 @@
       "id": "phuong-thao",
       "name": "Phương Thảo",
       "type": "normal",
-      "confirmation": false
+      "confirmation": true
     },
     {
       "id": "anh-huan",
