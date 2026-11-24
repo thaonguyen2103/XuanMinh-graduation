@@ -192,6 +192,12 @@
       "name": "Anh Nhân",
       "type": "normal",
       "confirmation": true
+    },
+    {
+      "id": "mai-bae",
+      "name": "Mai Bae",
+      "type": "normal",
+      "confirmation": false
     }
   ]
 }
